@@ -2,7 +2,7 @@
 #include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
 int main(){ // Função principal
-  funcao funcoes[] = {adicionar}; // Definindo um array de funções que serão utilizadas no programa
+  funcao funcoes[] = {adicionar, listar}; // Definindo um array de funções que serão utilizadas no programa
 
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
@@ -11,6 +11,7 @@ int main(){ // Função principal
     do{ // Início do loop do menu de opções até que o usuário escolha a opção de sair
         printf("\nMenu principal\n"); // Imprimindo o menu de opções
         printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
+        printf("2) Listar contatos\n"); // Imprimindo a segunda opção
         printf("0) Sair\n"); // Imprimindo a última opção
         printf("Escolha uma opção: "); // Pedindo ao usuário para escolher uma opção
         scanf("%d", &opcao); // Lendo a opção escolhida pelo usuário
