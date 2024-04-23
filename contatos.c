@@ -1,44 +1,49 @@
-#include <stdio.h>
-#include <string.h>
-#include "contatos.h"
+#include <stdio.h> // Importa a biblioteca stdio.h para que possamos utilizar as funções de entrada e saída padrão de dados
+#include <string.h> // Importa a biblioteca string.h para que possamos utilizar as funções de manipulação de strings
+#include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
-ERROS criar(Contato contatos[], int *pos) {
-    if (*pos >= TOTAL) {
-        return MAX_contato; // Retorna erro se o limite de contatos foi alcançado.
-    }
+ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, recebe um array de contatos e um ponteiro para a posição atual dos contatos
+  if(*pos >= LIMITE_AGENDA) // Verificando erro de limite de contatos atingido
+    return MAX_CONTATOS; // Retornando código de ultrapassou do limite de contatos
 
-    printf("Digite o nome do contato: ");
-    clearBuffer(); // Limpa o buffer do teclado antes de usar fgets.
-    fgets(contatos[*pos].nome, sizeof(contatos[*pos].nome), stdin);
-    contatos[*pos].nome[strcspn(contatos[*pos].nome, "\n")] = 0; // Remove a quebra de linha.
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+  printf("\nDigite o nome do contato: "); // Pedindo para o usuário nos informar o nome do contato
+  fgets(contatos[*pos].nome, 20, stdin); // Lendo o nome digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
-    printf("Digite o telefone do contato: ");
-    fgets(contatos[*pos].telefone, sizeof(contatos[*pos].telefone), stdin);
-    contatos[*pos].telefone[strcspn(contatos[*pos].telefone, "\n")] = 0; // Remove a quebra de linha.
+  printf("Digite o sobrenome do contato: "); // Pedindo para o usuário nos informar o sobrenome do contato
+  fgets(contatos[*pos].sobrenome, 100, stdin); // Lendo o sobrenome digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
-    (*pos)++; // Incrementa a posição para o próximo contato.
+  printf("Digite o email do contato: "); // Pedindo para o usuário nos informar o email do contato
+  fgets(contatos[*pos].email, 100, stdin); // Lendo o email digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
-    printf("Contato criado com sucesso.\n");
+  printf("Digite o telefone do contato: "); // Pedindo para o usuário nos informar o telefone do contato
+  scanf("%ld", &contatos[*pos].telefone); // Lendo o telefone digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
-    return OK; // Retorna OK se o contato foi criado com sucesso.
-}
+  *pos = *pos + 1; // Incrementando a posição para o próximo contato
 
-ERROS deletar(Contato contatos[], int *pos) {
-    // Implemente a lógica para deletar um contato
-    return OK;
-}
+  return OK; // Retornando código de sucesso na execução
+} // Fechando função de adicionar contato
 
-ERROS listar(Contato contatos[], int *pos) {
+ERRO listar(Agenda contatos[], int *pos) {
     // Implemente a lógica para listar os contatos
     return OK;
 }
 
-ERROS salvar(Contato contatos[], int *pos) {
+ERRO deletar(Agenda contatos[], int *pos) {
+    // Implemente a lógica para deletar um contato
+    return OK;
+}
+
+ERRO salvar(Agenda contatos[], int *pos) {
     FILE *f = fopen("contatos.bin", "wb"); // abre o arquivo binário
     if (f == NULL) // caso ele estiver vazio
         return ABRIR; // retorna abrir
 
-    int qtd = fwrite(contatos, sizeof(Contato), *pos, f); // escreve o contato adicionado
+    int qtd = fwrite(contatos, sizeof(Agenda), *pos, f); // escreve o contato adicionado
     if (qtd != *pos)
         return ESCREVER;
 
@@ -48,12 +53,12 @@ ERROS salvar(Contato contatos[], int *pos) {
     return OK;
 }
 
-ERROS carregar(Contato contatos[], int *pos) { 
+ERRO carregar(Agenda contatos[], int *pos) { 
     FILE *f = fopen("contatos.bin", "rb"); // abre o arquivo se ele não estiver vazio
     if (f == NULL)
         return ABRIR;
 
-    int qtd = fread(contatos, sizeof(Contato), TOTAL, f); // lê o arquivo binário
+    int qtd = fread(contatos, sizeof(Agenda), LIMITE_AGENDA, f); // lê o arquivo binário
     if (qtd < 0)
         return LER;
 
@@ -65,7 +70,7 @@ ERROS carregar(Contato contatos[], int *pos) {
     return OK;
 }
 
-void clearBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
+void clearBuffer(){ // Função de Limpar Buffer, para evitar o erro gerado ao tentar obter a entrada de informações do usuário
+    int c;  // Declarando variável do tipo inteiro para armazenar o caractere lido do buffer
+    while ((c = getchar()) != '\n' && c != EOF); // Loop para limpar o buffer do teclado, comparando o valor lido com o valor \n (New Line), e também comparando com o valor EOF (End Of File), para garantir que ele não continue tentando ler quando chegar ao final do arquivo
+} // Fechando função de limpar buffer

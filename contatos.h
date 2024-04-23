@@ -1,23 +1,21 @@
-#ifndef CONTATOS_H
-#define CONTATOS_H
+// Definindo uma "variável" global e constante para a quantidade máxima de contatos que podem ser armazenados na agenda
+#define LIMITE_AGENDA 255 
 
-#define TOTAL 100
+typedef struct { // Definindo uma estrutura para armazenar as informações dentro de cada contato
+    char nome[20]; // Declarando variável do tipo string com 20 caracteres para armazenar o nome do contato
+    char sobrenome[100]; // Declarando variável do tipo string com 100 caracteres para armazenar o sobrenome do contato
+    char email[100]; // Declarando variável do tipo string com 100 caracteres para armazenar o email do contato
+    long int telefone; // Declarando variável do tipo inteiro longo para armazenar o telefone do contato
+} Agenda; // Definindo o nome da estrutura como Agenda
 
-typedef struct {
-    char nome[50];
-    char telefone[15];
-} Contato;
+typedef enum {OK, MAX_CONTATOS, SEM_CONTATOS, CONTATO_NAO_ENCONTRADO, ABRIR, FECHAR, ESCREVER, LER} ERRO;// Definindo uma enumeração de códigos de erro para ficar mais legível de identificar o que cada código significa
 
-typedef enum {OK, MAX_contato, SEM_CONTATOS, NAO_ENCONTRADO, ABRIR, FECHAR, ESCREVER, LER} ERROS;
+typedef ERRO (*funcao)(Agenda[], int*); // Definindo um tipo de função que recebe um array de contatos e um ponteiro para a posição atual dos contatos, e retorna um código de erro
 
-typedef ERROS (*funcao)(Contato[], int*);
+ERRO adicionar(Agenda contatos[], int *pos); // Assinatura da função de adicionar contato
+ERRO listar(Agenda contatos[], int *pos); // Assinatura da função de listar contatos
+ERRO deletar(Agenda contatos[], int *pos); // Assinatura da função de deletar contato
+ERRO salvar(Agenda contatos[], int *pos); // Assinatura da função de salvar contatos
+ERRO carregar(Agenda contatos[], int *pos); // Assinatura da função de carregar contatos
 
-ERROS criar(Contato contatos[], int *pos);
-ERROS deletar(Contato contatos[], int *pos);
-ERROS listar(Contato contatos[], int *pos);
-ERROS salvar(Contato contatos[], int *pos);
-ERROS carregar(Contato contatos[], int *pos);
-
-void clearBuffer();
-
-#endif
+void clearBuffer(); // Assinatura da função de limpar buffer
