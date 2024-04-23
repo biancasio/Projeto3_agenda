@@ -28,6 +28,48 @@ ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, r
   return OK; // Retornando código de sucesso na execução
 } // Fechando função de adicionar contato
 
+ERRO listar(Agenda contatos[], int *pos) {
+    // Implemente a lógica para listar os contatos
+    return OK;
+}
+
+ERRO deletar(Agenda contatos[], int *pos) {
+    // Implemente a lógica para deletar um contato
+    return OK;
+}
+
+ERRO salvar(Agenda contatos[], int *pos) {
+    FILE *f = fopen("contatos.bin", "wb"); // abre o arquivo binário
+    if (f == NULL) // caso ele estiver vazio
+        return ABRIR; // retorna abrir
+
+    int qtd = fwrite(contatos, sizeof(Agenda), *pos, f); // escreve o contato adicionado
+    if (qtd != *pos)
+        return ESCREVER;
+
+    if (fclose(f) != 0) // se o arquivo não estiver vazio, ele fecha
+        return FECHAR;
+
+    return OK;
+}
+
+ERRO carregar(Agenda contatos[], int *pos) { 
+    FILE *f = fopen("contatos.bin", "rb"); // abre o arquivo se ele não estiver vazio
+    if (f == NULL)
+        return ABRIR;
+
+    int qtd = fread(contatos, sizeof(Agenda), LIMITE_AGENDA, f); // lê o arquivo binário
+    if (qtd < 0)
+        return LER;
+
+    *pos = qtd;
+
+    if (fclose(f) != 0) // fecha o arquivo
+        return FECHAR;
+
+    return OK;
+}
+
 void clearBuffer(){ // Função de Limpar Buffer, para evitar o erro gerado ao tentar obter a entrada de informações do usuário
     int c;  // Declarando variável do tipo inteiro para armazenar o caractere lido do buffer
     while ((c = getchar()) != '\n' && c != EOF); // Loop para limpar o buffer do teclado, comparando o valor lido com o valor \n (New Line), e também comparando com o valor EOF (End Of File), para garantir que ele não continue tentando ler quando chegar ao final do arquivo
