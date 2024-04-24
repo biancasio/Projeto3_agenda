@@ -16,6 +16,6 @@ ERRO adicionar(Agenda contatos[], int *pos); // Assinatura da função de adicio
 ERRO listar(Agenda contatos[], int *pos); // Assinatura da função de listar contatos
 ERRO deletar(Agenda contatos[], int *pos); // Assinatura da função de deletar contato
 ERRO salvar(Agenda contatos[], int *pos); // Assinatura da função de salvar contatos
-ERRO carregar(Agenda contatos[], int *pos); // Assinatura da função de carregar contatos
+ERRO carregar(Agenda contatos[], int *pos); // Assinatura da função de carregar contato
 
 void clearBuffer(); // Assinatura da função de limpar buffer
