@@ -28,20 +28,10 @@ ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, r
   return OK; // Retornando código de sucesso na execução
 } // Fechando função de adicionar contato
 
-ERRO listar(Agenda contatos[], int *pos){ // Função de listar contatos, recebe um array de contatos e um ponteiro para a posição atual dos contatos
-  if(*pos == 0)  // Verificando erro de nenhum contato foi criado para ser possível listar
-    return SEM_CONTATOS; // Retornando código de nenhum contato para listar
-
-  for(int i=0; i<*pos; i++){ // Percorrendo o array de contatos para listar todos os contatos e cada uma de suas informações
-    printf("\nPosição: %d\t", i+1); // Imprimindo a posição do contato
-    printf("Nome: %s\t", contatos[i].nome); // Imprimindo o nome do contato
-    printf("Sobrenome: %s\t", contatos[i].sobrenome); // Imprimindo o sobrenome do contato
-    printf("Email: %s\t", contatos[i].email); // Imprimindo o email do contato
-    printf("Telefone: %ld\n", contatos[i].telefone); // Imprimindo o telefone do contato
-  }  // Fechando for para listar contatos
-
-  return OK; // Retornando código de sucesso na execução
-} // Fechando função de listar contatos
+ERRO listar(Agenda contatos[], int *pos) {
+    // Implemente a lógica para listar os contatos
+    return OK;
+}
 
 ERRO deletar(Agenda contatos[], int *pos) {
     // Implemente a lógica para deletar um contato
