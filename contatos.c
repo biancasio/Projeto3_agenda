@@ -44,9 +44,26 @@ ERRO listar(Agenda contatos[], int *pos){ // Função de listar contatos, recebe
 } // Fechando função de listar contatos
 
 ERRO deletar(Agenda contatos[], int *pos) {
-    // Implemente a lógica para deletar um contato
-    return OK;
+  if (*pos == 0)
+    return SEM_CONTATOS;
+
+  int pos_delet;
+  printf("Entre com a posição do contato a ser deletado: ");
+  scanf("%d", &pos_delet);
+
+  if (pos_delet >= *pos)
+    return CONTATO_NAO_ENCONTRADO;
+
+  for (int i = pos_delet; i < *pos - 1; i++) {
+    contatos[i] = contatos[i + 1];
+  }
+
+  (*pos)--; // Decrementa o contador de contatos após a exclusão
+  
+
+  return OK;
 }
+
 
 ERRO salvar(Agenda contatos[], int *pos) {
     FILE *f = fopen("contatos.bin", "wb"); // abre o arquivo binário
