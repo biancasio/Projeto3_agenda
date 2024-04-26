@@ -43,19 +43,19 @@ ERRO listar(Agenda contatos[], int *pos){ // Função de listar contatos, recebe
   return OK; // Retornando código de sucesso na execução
 } // Fechando função de listar contatos
 
-ERRO deletar(Agenda contatos[], int *pos) {
-  if (*pos == 0)
-    return SEM_CONTATOS;
+ERRO deletar(Agenda contatos[], int *pos) { // Função de deletar contatos, recebe um array de contatos e um ponteiro para a posição atual dos contatos
+  if (*pos == 0) // Verificando erro de nenhum contato foi criado para ser possível deletar
+    return SEM_CONTATOS; // retorna erro
 
   int pos_delet;
-  printf("Entre com a posição do contato a ser deletado: ");
+  printf("Entre com a posição do contato a ser deletado: "); // digite a posição a ser deletada
   scanf("%d", &pos_delet);
 
-  if (pos_delet >= *pos)
-    return CONTATO_NAO_ENCONTRADO;
+  if (pos_delet >= *pos) // se não existir contato 
+    return CONTATO_NAO_ENCONTRADO; // retorna mensagem de erro
 
-  for (int i = pos_delet; i < *pos - 1; i++) {
-    contatos[i] = contatos[i + 1];
+  for (int i = pos_delet; i < *pos - 1; i++) {  // Percorrendo o array de contatos para deletar os contatos 
+    contatos[i] = contatos[i + 1]; 
   }
 
   (*pos)--; // Decrementa o contador de contatos após a exclusão
