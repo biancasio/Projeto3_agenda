@@ -7,15 +7,15 @@ int main(){ // Função principal
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
   
-  ERRO erro = funcoes[4](contatos, &pos);
+  ERRO erro = funcoes[4](contatos, &pos); // funções que mostram os erros
     if (erro == ABRIR) {
-        printf("Erro ao carregar o arquivo para abrir.\n");
+        printf("Erro ao carregar o arquivo para abrir.\n"); //mensagem de erro
         pos = 0;
     } else if (erro == FECHAR) {
-        printf("Erro ao carregar o arquivo para fechar.\n");
+        printf("Erro ao carregar o arquivo para fechar.\n"); // mensagem de erro
         pos = 0;
     } else if (erro == LER) {
-        printf("Erro ao carregar o arquivo para ler.\n");
+        printf("Erro ao carregar o arquivo para ler.\n"); // mensagem de erro
         pos = 0;
     }
 
@@ -34,22 +34,22 @@ int main(){ // Função principal
         opcao--; // Decrementando a opção para acessar o índice do array de funções
         if (opcao < -1 || opcao > 4) { // Verificando se a opção escolhida é válida
             printf("Opção inválida\n"); // Informando para o usuário que a opção escolhida é inválida
-        } else if (opcao == 0) {
-            erro = funcoes[opcao](contatos, &pos);
+        } else if (opcao == 0) { 
+            erro = funcoes[opcao](contatos, &pos); 
+                printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
             if (erro == MAX_CONTATOS) {
-                printf("Máximo de contatos alcançados\n");
             }
         } else if (opcao == 1) {
             erro = funcoes[opcao](contatos, &pos);
-            if (erro == SEM_CONTATOS) {
-                printf("Sem contatos para deletar\n");
-            } else if (erro == CONTATO_NAO_ENCONTRADO) {
-                printf("Contato não existe\n");
+            if (erro == SEM_CONTATOS) { // se não possuir contatos para deletar mostrar 
+                printf("Sem contatos para deletar\n"); // mensagem de erro
+            } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
+                printf("Contato não existe\n"); // mensagem de erro
             }
-        } else if (opcao == 2) {
-            erro = funcoes[opcao](contatos, &pos);
+        } else if (opcao == 2) { // se a opção for igual a 2
+            erro = funcoes[opcao](contatos, &pos); // mostrar erro
             if (erro == CONTATO_NAO_ENCONTRADO) {
-                printf("Sem contatos para listar\n");
+                printf("Sem contatos para listar\n"); // mensagem de erro
             }
         } else if (opcao == 3 || opcao == 4) {
             funcoes[opcao](contatos, &pos);
@@ -59,12 +59,12 @@ int main(){ // Função principal
     } while (opcao != -1); // Condição para que o loop continue até que o usuário escolha a opção de sair, quando isso acontecer o loop se encerra
 
     erro = funcoes[3](contatos, &pos);
-    if (erro == ABRIR) {
-        printf("Erro para abrir o arquivo ao salvar\n");
+    if (erro == ABRIR) { // erros possiveis do arquivo binário
+        printf("Erro para abrir o arquivo ao salvar\n"); // mensagem de erro do arquivo
     } else if (erro == FECHAR) {
-        printf("Erro para fechar o arquivo ao salvar\n");
+        printf("Erro para fechar o arquivo ao salvar\n"); // mensagem de erro do arquivo
     } else if (erro == ESCREVER) {
-        printf("Erro ao escrever no arquivo ao salvar\n");
+        printf("Erro ao escrever no arquivo ao salvar\n"); // mensagem de erro do arquivo
     }
 
     return 0;
