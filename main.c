@@ -23,8 +23,8 @@ int main(){ // Função principal
     do{ // Início do loop do menu de opções até que o usuário escolha a opção de sair
         printf("\nMenu principal\n"); // Imprimindo o menu de opções
         printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
-        printf("2) Deletar contato\n"); // Imprimindo a segunda opção
-        printf("3) Listar contatos\n"); // Imprimindo a terceira opção
+        printf("2) Listar contatos \n"); // Imprimindo a segunda opção
+        printf("3) Deletar contato\n"); // Imprimindo a terceira opção
         printf("4) Salvar contatos\n"); // Imprimindo a quarta opção
         printf("5) Carregar contatos\n"); // Imprimindo a quinta opção
         printf("0) Sair\n"); // Imprimindo a última opção
