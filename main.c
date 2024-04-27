@@ -2,7 +2,7 @@
 #include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
 int main(){ // Função principal
-  funcao funcoes[] = {adicionar, listar, deletar, listar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
+  funcao funcoes[] = {adicionar, deletar, listar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
 
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
