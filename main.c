@@ -6,7 +6,7 @@ int main(){ // Função principal
 
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
-  
+
   ERRO erro = funcoes[4](contatos, &pos); // funções que mostram os erros
     if (erro == ABRIR) {
         printf("Erro ao carregar o arquivo para abrir.\n"); //mensagem de erro
@@ -24,20 +24,20 @@ int main(){ // Função principal
         printf("\nMenu principal\n"); // Imprimindo o menu de opções
         printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
         printf("2) Deletar contato \n"); // Imprimindo a segunda opção
-        printf("3) Listar contatos \n"); // Imprimindo a terceira opção
+        printf("3) Listar contatos\n"); // Imprimindo a terceira opção
         printf("4) Salvar contatos\n"); // Imprimindo a quarta opção
         printf("5) Carregar contatos\n"); // Imprimindo a quinta opção
         printf("0) Sair\n"); // Imprimindo a última opção
         printf("Escolha uma opção: "); // Pedindo ao usuário para escolher uma opção
         scanf("%d", &opcao); // Lendo a opção escolhida pelo usuário
-        
+
         opcao--; // Decrementando a opção para acessar o índice do array de funções
         if (opcao < -1 || opcao > 4) { // Verificando se a opção escolhida é válida
             printf("Opção inválida\n"); // Informando para o usuário que a opção escolhida é inválida
         } else if (opcao == 0) { 
             erro = funcoes[opcao](contatos, &pos); 
-                printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
             if (erro == MAX_CONTATOS) {
+              printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
             }
         } else if (opcao == 1) {
             erro = funcoes[opcao](contatos, &pos);
