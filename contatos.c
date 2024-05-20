@@ -26,7 +26,6 @@ ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, r
   // Verificar se o telefone já existe
     for (int i = 0; i < *pos; i++) {
         if (contatos[i].telefone == telefone) {
-          printf("Telefone já existente. Tente novamente com um número diferente.\n"); // Adicionada mensagem de erro para telefone duplicado
             return TELEFONE_DUPLICADO;
         }
     }
@@ -73,6 +72,54 @@ ERRO deletar(Agenda contatos[], int *pos) { // Função de deletar contatos, rec
 
 
   return OK;
+}
+
+ERRO alterar(Agenda contatos[], int *pos) { // Função de alterar contatos, recebe um array de contatos e um ponteiro para a posição atual dos contatos
+    if (*pos == 0) // Verificando erro de nenhum contato foi criado para ser possível alterar
+      return SEM_CONTATOS; // retorna erro
+
+    int pos_alterar; // Declarando variável do tipo inteiro para armazenar a posição do contato a ser alterado
+    printf("Entre com a posição do contato a ser alterado: "); // Pedindo a posição a ser alterada
+    scanf("%d", &pos_alterar); // Lendo a posição a ser alterada
+
+    pos_alterar--; // Decrementando a posição para acessar o índice do array de contatos
+
+    if (pos_alterar >= *pos) // Verificando se existe contato 
+      return CONTATO_NAO_ENCONTRADO; // Retornando mensagem de erro
+
+    clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+    printf("\nDigite o nome do contato: "); // Pedindo para o usuário nos informar o nome do contato
+    fgets(contatos[pos_alterar].nome, 20, stdin); // Lendo o nome digitado pelo usuário
+    clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+
+    printf("Digite o sobrenome do contato: "); // Pedindo para o usuário nos informar o sobrenome do contato
+    fgets(contatos[pos_alterar].sobrenome, 100, stdin); // Lendo o sobrenome digitado pelo usuário
+    clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+
+    printf("Digite o email do contato: "); // Pedindo para o usuário nos informar o email do contato
+    fgets(contatos[pos_alterar].email, 100, stdin); // Lendo o email digitado pelo usuário
+    clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+
+    long long int novo_telefone; // Declarando variável do tipo inteiro longo para armazenar o telefone do contato
+
+    printf("Digite o telefone do contato: "); // Pedindo para o usuário nos informar o telefone do contato
+    scanf("%lld", &novo_telefone); // Lendo o telefone digitado pelo usuário
+    clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclad
+  
+    for(int i = 0; i < *pos; i++){ // Percorrendo o array de contatos
+          if (novo_telefone != contatos[i].telefone) 
+          {
+              contatos[pos_alterar].telefone = novo_telefone; // Alterando o telefone do contato
+          }
+          else {
+              return TELEFONE_DUPLICADO; // Retornando mensagem de erro
+          }
+        }
+
+    printf("Contato alterado com sucesso!\n"); // Imprimindo mensagem de sucesso
+  
+    return OK; // Retornando código de sucesso
+
 }
 
 

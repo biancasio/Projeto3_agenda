@@ -2,12 +2,12 @@
 #include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
 int main(){ // Função principal
-  funcao funcoes[] = {adicionar, deletar, listar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
+  funcao funcoes[] = {adicionar, deletar, listar, alterar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
 
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
 
-  ERRO erro = funcoes[4](contatos, &pos); // funções que mostram os erros
+  ERRO erro = funcoes[5](contatos, &pos); // funções que mostram os erros
     if (erro == ABRIR) {
         printf("Erro ao carregar o arquivo para abrir.\n"); //mensagem de erro
         pos = 0;
@@ -25,8 +25,9 @@ int main(){ // Função principal
         printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
         printf("2) Deletar contato \n"); // Imprimindo a segunda opção
         printf("3) Listar contatos\n"); // Imprimindo a terceira opção
-        printf("4) Salvar contatos\n"); // Imprimindo a quarta opção
-        printf("5) Carregar contatos\n"); // Imprimindo a quinta opção
+        printf("4) Alterar contato\n"); // Imprimindo a quarta opção
+        printf("5) Salvar contatos\n"); // Imprimindo a quinta opção
+        printf("6) Carregar contatos\n"); // Imprimindo a sexta opção
         printf("0) Sair\n"); // Imprimindo a última opção
         printf("Escolha uma opção: "); // Pedindo ao usuário para escolher uma opção
         scanf("%d", &opcao); // Lendo a opção escolhida pelo usuário
@@ -38,37 +39,41 @@ int main(){ // Função principal
             erro = funcoes[opcao](contatos, &pos); 
             if (erro == MAX_CONTATOS) {
               printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
+            } else if (erro == TELEFONE_DUPLICADO) {
+                printf("Telefone já existente. Tente novamente com um número diferente.\n");
             }
 
-            } else if (opcao == 1) {
-            erro = funcoes[opcao](contatos, &pos);
-            if (erro == TELEFONE_DUPLICADO) {
-                printf("Telefone já existente. Tente novamente com um número diferente.\n");
-            } else if (erro == SEM_CONTATOS) {
-                printf("Sem contatos para deletar\n");
-            } else if (erro == CONTATO_NAO_ENCONTRADO) {
-                printf("Contato não existe\n");
-            }
-        } else if (opcao == 2) {
+        } else if (opcao == 1) {
             erro = funcoes[opcao](contatos, &pos);
             if (erro == SEM_CONTATOS) { // se não possuir contatos para deletar mostrar 
                 printf("Sem contatos para deletar\n"); // mensagem de erro
             } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
                 printf("Contato não existe\n"); // mensagem de erro
             }
-        } else if (opcao == 3) { // se a opção for igual a 2
-            erro = funcoes[opcao](contatos, &pos); // mostrar erro
-            if (erro == CONTATO_NAO_ENCONTRADO) {
+        } else if (opcao == 2) {
+            erro = funcoes[opcao](contatos, &pos);
+            if (erro == SEM_CONTATOS) { // se não possuir contatos para listar mostrar 
                 printf("Sem contatos para listar\n"); // mensagem de erro
+            } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
+                printf("Contato não existe\n"); // mensagem de erro
             }
-        } else if (opcao ==  4|| opcao == 5) {
+        } else if (opcao == 3) {
+            erro = funcoes[opcao](contatos, &pos);
+            if (erro == SEM_CONTATOS) { // se não possuir contatos para alterar mostrar 
+                printf("Sem contatos para alterar\n"); // mensagem de erro
+            } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
+                printf("Contato não existe\n"); // mensagem de erro
+            } else if (erro == TELEFONE_DUPLICADO) {
+                printf("Telefone já existente. Tente novamente com um número diferente.\n");
+            }
+        } else if (opcao == 4 || opcao == 5) {
             funcoes[opcao](contatos, &pos);
-        } else {
+        }else {
             printf("Sair...\n"); // Informando ao usuário que o programa foi encerrado
         }
     } while (opcao != -1); // Condição para que o loop continue até que o usuário escolha a opção de sair, quando isso acontecer o loop se encerra
 
-    erro = funcoes[3](contatos, &pos);
+    erro = funcoes[4](contatos, &pos);
     if (erro == ABRIR) { // erros possiveis do arquivo binário
         printf("Erro para abrir o arquivo ao salvar\n"); // mensagem de erro do arquivo
     } else if (erro == FECHAR) {
@@ -78,4 +83,5 @@ int main(){ // Função principal
     }
 
     return 0;
+    
 }

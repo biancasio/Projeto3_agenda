@@ -16,6 +16,7 @@ typedef ERRO (*funcao)(Agenda[], int*); // Definindo um tipo de função que rec
 ERRO adicionar(Agenda contatos[], int *pos); // Assinatura da função de adicionar contato
 ERRO listar(Agenda contatos[], int *pos); // Assinatura da função de listar contatos
 ERRO deletar(Agenda contatos[], int *pos); // Assinatura da função de deletar contato
+ERRO alterar(Agenda contatos[], int *pos); // Assinatura da função de alterar contato
 ERRO salvar(Agenda contatos[], int *pos); // Assinatura da função de salvar contatos
 ERRO carregar(Agenda contatos[], int *pos); // Assinatura da função de carregar contatos
 
