@@ -6,6 +6,7 @@ ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, r
   if(*pos >= LIMITE_AGENDA) // Verificando erro de limite de contatos atingido
     return MAX_CONTATOS; // Retornando código de ultrapassou do limite de contatos
 
+  long long int telefone;
   clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
   printf("\nDigite o nome do contato: "); // Pedindo para o usuário nos informar o nome do contato
   fgets(contatos[*pos].nome, 20, stdin); // Lendo o nome digitado pelo usuário
@@ -20,10 +21,18 @@ ERRO adicionar(Agenda contatos[], int *pos){ // Função de adicionar contato, r
   clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
   printf("Digite o telefone do contato: "); // Pedindo para o usuário nos informar o telefone do contato
-  scanf("%ld", &contatos[*pos].telefone); // Lendo o telefone digitado pelo usuário
+  scanf("%lld", &telefone); // Lendo o telefone digitado pelo usuário
   clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+  // Verificar se o telefone já existe
+    for (int i = 0; i < *pos; i++) {
+        if (contatos[i].telefone == telefone) {
+          printf("Telefone já existente. Tente novamente com um número diferente.\n"); // Adicionada mensagem de erro para telefone duplicado
+            return TELEFONE_DUPLICADO;
+        }
+    }
 
-  *pos = *pos + 1; // Incrementando a posição para o próximo contato
+  contatos[*pos].telefone = telefone; 
+  (*pos)++; // Incrementando a posição para o próximo contato
 
   return OK; // Retornando código de sucesso na execução
 } // Fechando função de adicionar contato
@@ -37,7 +46,7 @@ ERRO listar(Agenda contatos[], int *pos){ // Função de listar contatos, recebe
     printf("Nome: %s\t", contatos[i].nome); // Imprimindo o nome do contato
     printf("Sobrenome: %s\t", contatos[i].sobrenome); // Imprimindo o sobrenome do contato
     printf("Email: %s\t", contatos[i].email); // Imprimindo o email do contato
-    printf("Telefone: %ld\n", contatos[i].telefone); // Imprimindo o telefone do contato
+    printf("Telefone: %lld\n", contatos[i].telefone); // Imprimindo o telefone do contato
   }  // Fechando for para listar contatos
 
   return OK; // Retornando código de sucesso na execução

@@ -39,19 +39,29 @@ int main(){ // Função principal
             if (erro == MAX_CONTATOS) {
               printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
             }
-        } else if (opcao == 1) {
+
+            } else if (opcao == 1) {
+            erro = funcoes[opcao](contatos, &pos);
+            if (erro == TELEFONE_DUPLICADO) {
+                printf("Telefone já existente. Tente novamente com um número diferente.\n");
+            } else if (erro == SEM_CONTATOS) {
+                printf("Sem contatos para deletar\n");
+            } else if (erro == CONTATO_NAO_ENCONTRADO) {
+                printf("Contato não existe\n");
+            }
+        } else if (opcao == 2) {
             erro = funcoes[opcao](contatos, &pos);
             if (erro == SEM_CONTATOS) { // se não possuir contatos para deletar mostrar 
                 printf("Sem contatos para deletar\n"); // mensagem de erro
             } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
                 printf("Contato não existe\n"); // mensagem de erro
             }
-        } else if (opcao == 2) { // se a opção for igual a 2
+        } else if (opcao == 3) { // se a opção for igual a 2
             erro = funcoes[opcao](contatos, &pos); // mostrar erro
             if (erro == CONTATO_NAO_ENCONTRADO) {
                 printf("Sem contatos para listar\n"); // mensagem de erro
             }
-        } else if (opcao == 3 || opcao == 4) {
+        } else if (opcao ==  4|| opcao == 5) {
             funcoes[opcao](contatos, &pos);
         } else {
             printf("Sair...\n"); // Informando ao usuário que o programa foi encerrado
