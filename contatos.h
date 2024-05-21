@@ -2,6 +2,7 @@
 #define LIMITE_AGENDA 255 
 
 typedef struct { // Definindo uma estrutura para armazenar as informações dentro de cada contato
+    char grau[20];
     char nome[20]; // Declarando variável do tipo string com 20 caracteres para armazenar o nome do contato
     char sobrenome[100]; // Declarando variável do tipo string com 100 caracteres para armazenar o sobrenome do contato
     char email[100]; // Declarando variável do tipo string com 100 caracteres para armazenar o email do contato

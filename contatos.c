@@ -23,6 +23,11 @@ ERRO adicionar_pessoal(Agenda contatos[], int *pos){ // Função de adicionar co
   scanf("%ld", &contatos[*pos].telefone); // Lendo o telefone digitado pelo usuário
   clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+  printf("Digite o grau de Relacionamento: "); // Pedindo para o usuário nos informar o nome do contato
+  fgets(contatos[*pos].grau, 20, stdin); // Lendo o nome digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+
   *pos = *pos + 1; // Incrementando a posição para o próximo contato
 
   return OK; // Retornando código de sucesso na execução
@@ -49,6 +54,11 @@ ERRO adicionar_trabalho(Agenda contatos[], int *pos){ // Função de adicionar c
   scanf("%ld", &contatos[*pos].telefone); // Lendo o telefone digitado pelo usuário
   clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
 
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+  printf("Digite o grau de Relacionamento: "); // Pedindo para o usuário nos informar o nome do contato
+  fgets(contatos[*pos].grau, 20, stdin); // Lendo o nome digitado pelo usuário
+  clearBuffer(); // Chamando a função clearBuffer para limpar o buffer do teclado
+
   *pos = *pos + 1; // Incrementando a posição para o próximo contato
 
   return OK; // Retornando código de sucesso na execução
@@ -60,6 +70,7 @@ ERRO listar(Agenda contatos[], int *pos){ // Função de listar contatos, recebe
 
   for(int i=0; i<*pos; i++){ // Percorrendo o array de contatos para listar todos os contatos e cada uma de suas informações
     printf("\nPosição: %d\t", i+1); // Imprimindo a posição do contato
+    printf("Grau de Relacionamento: %s\t", contatos[i].grau); // Imprimindo o nome do contato
     printf("Nome: %s\t", contatos[i].nome); // Imprimindo o nome do contato
     printf("Sobrenome: %s\t", contatos[i].sobrenome); // Imprimindo o sobrenome do contato
     printf("Email: %s\t", contatos[i].email); // Imprimindo o email do contato
