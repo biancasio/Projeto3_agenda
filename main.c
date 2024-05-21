@@ -2,7 +2,7 @@
 #include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
 int main(){ // Função principal
-  funcao funcoes[] = {adicionar, deletar, listar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
+  funcao funcoes[] = {adicionar_pessoal, adicionar_trabalho, deletar, listar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
 
   Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
   int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
@@ -22,11 +22,12 @@ int main(){ // Função principal
     int opcao; // Declarando variável do tipo inteiro para a escolha da opção do menu
     do{ // Início do loop do menu de opções até que o usuário escolha a opção de sair
         printf("\nMenu principal\n"); // Imprimindo o menu de opções
-        printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
-        printf("2) Deletar contato \n"); // Imprimindo a segunda opção
-        printf("3) Listar contatos\n"); // Imprimindo a terceira opção
-        printf("4) Salvar contatos\n"); // Imprimindo a quarta opção
-        printf("5) Carregar contatos\n"); // Imprimindo a quinta opção
+        printf("1) Adicionar contato pessoal\n"); // Imprimindo a primeira opção
+        printf("2) Adicionar contato trabalho\n"); // Imprimindo a primeira opção
+        printf("3) Deletar contato \n"); // Imprimindo a segunda opção
+        printf("4) Listar contatos\n"); // Imprimindo a terceira opção
+        printf("5) Salvar contatos\n"); // Imprimindo a quarta opção
+        printf("6) Carregar contatos\n"); // Imprimindo a quinta opção
         printf("0) Sair\n"); // Imprimindo a última opção
         printf("Escolha uma opção: "); // Pedindo ao usuário para escolher uma opção
         scanf("%d", &opcao); // Lendo a opção escolhida pelo usuário
@@ -46,12 +47,19 @@ int main(){ // Função principal
             } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
                 printf("Contato não existe\n"); // mensagem de erro
             }
-        } else if (opcao == 2) { // se a opção for igual a 2
+        } else if (opcao == 2) {
+            erro = funcoes[opcao](contatos, &pos);
+            if (erro == SEM_CONTATOS) { // se não possuir contatos para deletar mostrar 
+                printf("Sem contatos para deletar\n"); // mensagem de erro
+            } else if (erro == CONTATO_NAO_ENCONTRADO) { // se o contato não for encontrado
+                printf("Contato não existe\n"); // mensagem de erro
+            }
+        } else if (opcao == 3) { // se a opção for igual a 2
             erro = funcoes[opcao](contatos, &pos); // mostrar erro
             if (erro == CONTATO_NAO_ENCONTRADO) {
                 printf("Sem contatos para listar\n"); // mensagem de erro
             }
-        } else if (opcao == 3 || opcao == 4) {
+        } else if (opcao == 4 || opcao == 5) {
             funcoes[opcao](contatos, &pos);
         } else {
             printf("Sair...\n"); // Informando ao usuário que o programa foi encerrado

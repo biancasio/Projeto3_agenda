@@ -12,7 +12,8 @@ typedef enum {OK, MAX_CONTATOS, SEM_CONTATOS, CONTATO_NAO_ENCONTRADO, ABRIR, FEC
 
 typedef ERRO (*funcao)(Agenda[], int*); // Definindo um tipo de função que recebe um array de contatos e um ponteiro para a posição atual dos contatos, e retorna um código de erro
 
-ERRO adicionar(Agenda contatos[], int *pos); // Assinatura da função de adicionar contato
+ERRO adicionar_pessoal(Agenda contatos[], int *pos); // Assinatura da função de adicionar contato
+ERRO adicionar_trabalho(Agenda contatos[], int *pos); // Assinatura da função de adicionar contato
 ERRO listar(Agenda contatos[], int *pos); // Assinatura da função de listar contatos
 ERRO deletar(Agenda contatos[], int *pos); // Assinatura da função de deletar contato
 ERRO salvar(Agenda contatos[], int *pos); // Assinatura da função de salvar contatos
