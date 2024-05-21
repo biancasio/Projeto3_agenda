@@ -8,7 +8,7 @@ typedef struct { // Definindo uma estrutura para armazenar as informações dent
     long  long int telefone; // Declarando variável do tipo inteiro longo para armazenar o telefone do contato
 } Agenda; // Definindo o nome da estrutura como Agenda
 
-typedef enum {OK, MAX_CONTATOS, SEM_CONTATOS, CONTATO_NAO_ENCONTRADO, ABRIR, FECHAR, ESCREVER, LER, TELEFONE_DUPLICADO} ERRO;
+typedef enum {OK, MAX_CONTATOS, SEM_CONTATOS, CONTATO_NAO_ENCONTRADO, ABRIR, FECHAR, ESCREVER, LER, TELEFONE_DUPLICADO, EMAIL_INVALIDO} ERRO;
 // Definindo uma enumeração de códigos de erro para ficar mais legível de identificar o que cada código significa
 
 typedef ERRO (*funcao)(Agenda[], int*); // Definindo um tipo de função que recebe um array de contatos e um ponteiro para a posição atual dos contatos, e retorna um código de erro
@@ -19,5 +19,7 @@ ERRO deletar(Agenda contatos[], int *pos); // Assinatura da função de deletar 
 ERRO alterar(Agenda contatos[], int *pos); // Assinatura da função de alterar contato
 ERRO salvar(Agenda contatos[], int *pos); // Assinatura da função de salvar contatos
 ERRO carregar(Agenda contatos[], int *pos); // Assinatura da função de carregar contatos
+
+int validarEmail(const char *email); // Declaração da função de validação de email
 
 void clearBuffer(); // Assinatura da função de limpar buffer
