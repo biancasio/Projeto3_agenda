@@ -1,15 +1,15 @@
 #include <stdio.h> // Importa a biblioteca stdio.h para que possamos utilizar as funções de entrada e saída padrão de dados
 #include "contatos.h" // Importa o arquivo tarefas.h para que possamos utilizar as funções declaradas nele
 
-int main(){ // Função principal
-  funcao funcoes[] = {adicionar, deletar, listar, alterar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
+int main() { // Função principal
+    funcao funcoes[] = {adicionar, deletar, listar, alterar, salvar, carregar}; // Definindo um array de funções que serão utilizadas no programa
 
-  Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
-  int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
+    Agenda contatos[LIMITE_AGENDA]; // Declarando um array de contatos (com limite de 255), onde cada contato possui uma estrutura com as informações de nome, sobrenome, email e telefone
+    int pos; // Declarando variável do tipo inteiro para armazenar a posição dos contatos no array
 
-  ERRO erro = funcoes[5](contatos, &pos); // funções que mostram os erros
+    ERRO erro = funcoes[5](contatos, &pos); // funções que mostram os erros
     if (erro == ABRIR) {
-        printf("Erro ao carregar o arquivo para abrir.\n"); //mensagem de erro
+        printf("Erro ao carregar o arquivo para abrir.\n"); // mensagem de erro
         pos = 0;
     } else if (erro == FECHAR) {
         printf("Erro ao carregar o arquivo para fechar.\n"); // mensagem de erro
@@ -20,7 +20,7 @@ int main(){ // Função principal
     }
 
     int opcao; // Declarando variável do tipo inteiro para a escolha da opção do menu
-    do{ // Início do loop do menu de opções até que o usuário escolha a opção de sair
+    do { // Início do loop do menu de opções até que o usuário escolha a opção de sair
         printf("\nMenu principal\n"); // Imprimindo o menu de opções
         printf("1) Adicionar contatos\n"); // Imprimindo a primeira opção
         printf("2) Deletar contato \n"); // Imprimindo a segunda opção
@@ -38,11 +38,12 @@ int main(){ // Função principal
         } else if (opcao == 0) { 
             erro = funcoes[opcao](contatos, &pos); 
             if (erro == MAX_CONTATOS) {
-              printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
+                printf("Máximo de contatos alcançados\n"); // se a posição for igual a máxima de contatos mostra erro
             } else if (erro == TELEFONE_DUPLICADO) {
                 printf("Telefone já existente. Tente novamente com um número diferente.\n");
+            } else if (erro == EMAIL_INVALIDO) {
+                printf("Email inválido. Tente novamente com um email válido.\n");
             }
-
         } else if (opcao == 1) {
             erro = funcoes[opcao](contatos, &pos);
             if (erro == SEM_CONTATOS) { // se não possuir contatos para deletar mostrar 
@@ -65,10 +66,12 @@ int main(){ // Função principal
                 printf("Contato não existe\n"); // mensagem de erro
             } else if (erro == TELEFONE_DUPLICADO) {
                 printf("Telefone já existente. Tente novamente com um número diferente.\n");
+            } else if (erro == EMAIL_INVALIDO) {
+                printf("Email inválido. Tente novamente com um email válido.\n");
             }
         } else if (opcao == 4 || opcao == 5) {
             funcoes[opcao](contatos, &pos);
-        }else {
+        } else {
             printf("Sair...\n"); // Informando ao usuário que o programa foi encerrado
         }
     } while (opcao != -1); // Condição para que o loop continue até que o usuário escolha a opção de sair, quando isso acontecer o loop se encerra
@@ -83,5 +86,4 @@ int main(){ // Função principal
     }
 
     return 0;
-    
 }
